@@ -18,6 +18,10 @@ function formatBytes(bytes, decimals = 2) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
+function showProgress() {
+    document.getElementById("uploadProgress").classList.remove("d-none");
+}
+
 $('#uploadModal').on('hide.bs.modal', function () {
     document.getElementById("fileName").value = "";
 })
