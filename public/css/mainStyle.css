@@ -2,6 +2,11 @@ body {
   background-color: #453e4a;
 }
 
+.navbar-brand {
+  color: white;
+  font-size: 30px;
+}
+
 .card {
   margin: 10px auto;
   height: 150px;
@@ -39,7 +44,7 @@ body {
 }
 
 #uploadBtn:focus {
-  outline: 0;
+  box-shadow: none;
 }
 
 #uploadBtn:hover {
