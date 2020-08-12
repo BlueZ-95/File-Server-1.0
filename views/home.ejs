@@ -14,28 +14,29 @@
   <div class="container">
 
     <!-- Button trigger modal -->
-    <button id="uploadBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      <p>+</p>
-    </button>
+
 
     <!-- Modal -->
     <form action="/upload" method="POST" enctype="multipart/form-data">
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Upload File</h5>
+              <h5 class="modal-title" id="uploadModalLabel">Upload File</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <label class="btn btn-default">
-                Browse <input type="file" name="fileToUpload" hidden>
-              </label>
+              <div class="row">
+                <label style="color: white; border-radius: 0%;" class="btn btn-primary col-sm-3">
+                  Browse <input id="fileInput" type="file" name="fileToUpload" onchange="showFileDetails()" hidden>
+                </label>
+                <input style="border-radius: 0%; border: none;" id="fileName" class="form-control col-sm-9" type="text"
+                  placeholder="Select file to upload" disabled>
+              </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary" name="uploadFile">Upload</button>
             </div>
           </div>
@@ -44,31 +45,41 @@
     </form>
 
     <form action="/" method="POST">
-      <div class="row justify-content-md-center">
-        <% fileList.forEach((file) => { %>
+      <div class="row">
+        <% for(let i = 0; i < fileList.length; i++) { %>
         <div class="col-sm-3">
-          <div class="card text-center">
+          <a class="card text-center" href="/download/<%= fileList[i].substring(0, fileList[i].lastIndexOf(".")) %>">
             <div class="card-header">
-              <%= file %>
+              <h5><%= i + 1 %></h5>
             </div>
             <div class="card-body">
               <p class="card-text">
-                Lorem Ipsum
+                <% console.log(fileList[i].length) %>
+                <% if(fileList[i].length > 50) { %>
+                <%= fileList[i].substring(0, 51) + " ..." %>
+                <% } else {%>
+                <%= fileList[i]%>
+                <% } %>
               </p>
             </div>
-            <a class="btn btn-primary" href="/download/<%= file.substring(0, file.lastIndexOf(".")) %>"><svg width="1em"
-                height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-down" fill="currentColor"
+            <!-- <a class="btn btn-primary" href="/download/<%= fileList[i].substring(0, fileList[i].lastIndexOf(".")) %>">
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-down" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
                   d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                 <path fill-rule="evenodd"
                   d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-              </svg>Download</a>
-          </div>
+              </svg>
+              Download
+            </a> -->
+          </a>
         </div>
-        <% }) %>
+        <% } %>
       </div>
     </form>
+    <button id="uploadBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">
+      <p>+</p>
+    </button>
   </div>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
@@ -79,6 +90,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
   </script>
+  <script src="/Js/main.js"></script>
 </body>
 
 </html>

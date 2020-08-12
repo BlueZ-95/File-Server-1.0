@@ -1,0 +1,5 @@
+# exclude everything
+public/Files/*
+
+# exception to the rule
+public/Files/ReadMe.txt
